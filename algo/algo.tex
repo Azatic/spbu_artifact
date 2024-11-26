@@ -1,0 +1,159 @@
+\documentclass{beamer}
+\usetheme{Madrid} % Вы можете выбрать другую тему по желанию
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\title{Многопроцессорное расписание}
+\author{Габдрахманов Азат}
+\date{\today}
+
+\begin{document}
+
+% Титульный слайд
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Введение
+\begin{frame}{Введение}
+    \begin{itemize}
+        \item Многопроцессорное расписание — важная задача в области теории расписаний и оптимизации.
+        \item Применяется в компьютерных системах, производственных процессах, логистике и других областях.
+        \item Цель: оптимальное распределение заданий между процессорами для достижения наилучшего результата.
+        \item https://en.wikipedia.org/wiki/Flow-shop_scheduling
+    \end{itemize}
+\end{frame}
+
+% Формальное определение задачи
+\begin{frame}{Формальное определение задачи}
+    \textbf{Условие:}
+    \begin{itemize}
+        \item Задано множество заданий \( T \)
+        \item Число процессоров \( m \)
+        \item Длительность каждого задания \( l(t) \) для \( t \in T \)
+        \item Общий директивный срок \( D \)
+    \end{itemize}
+    
+    \textbf{Вопрос:}
+    Существует ли \( m \)-процессорное расписание для заданий из \( T \), которое удовлетворяет общему директивному сроку \( D \)?
+    
+    \textbf{Формальное условие:}
+    \[
+    \exists \, o: T \rightarrow \mathbb{Z}, \quad \forall u \geq 0, \quad \#\{ t \in T \mid o(t) \leq u < o(t) + l(t) \} \leq m
+    \]
+    и
+    \[
+    \forall t \in T, \quad o(t) + l(t) \leq D
+    \]
+\end{frame}
+
+% Общие виды заданий
+\begin{frame}{Общие виды заданий}
+    \begin{itemize}
+        \item \textbf{Процессоры с разной производительностью:}
+        \begin{itemize}
+            \item Некоторые процессоры могут выполнять задания быстрее других.
+            \item Время выполнения задания на процессоре \( P_j \): \( l(t)/s_j \), где \( s_j \) — скорость процессора.
+        \end{itemize}
+        \item \textbf{Зависимости между заданиями:}
+        \begin{itemize}
+            \item Некоторые задания не могут начинаться до завершения других.
+        \end{itemize}
+        \item \textbf{Приоритеты заданий:}
+        \begin{itemize}
+            \item Задания имеют разные приоритеты, влияющие на порядок их выполнения.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Частные случаи задачи
+\begin{frame}{Частные случаи задачи}
+    \begin{itemize}
+        \item \textbf{Одинаковое время выполнения всех заданий:}
+        \begin{itemize}
+            \item \( l(t) = l \) для всех \( t \in T \)
+            \item Проблема становится аналогом задачи разбиения множества (Partition)
+            \item В этом случае задача может быть решена за полиномиальное время.
+        \end{itemize}
+        \item \textbf{Ограниченное количество процессоров:}
+        \begin{itemize}
+            \item Для фиксированного \( m \) задача может быть проще решаемой.
+        \end{itemize}
+        \item \textbf{Отсутствие дедлайнов:}
+        \begin{itemize}
+            \item Задача упрощается, если нет ограничений по времени завершения.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Доказательство NP-полноты
+\begin{frame}{Доказательство NP-полноты}
+    \textbf{Класс NP:}
+    \begin{itemize}
+        \item Задачи, для которых решение можно проверить за полиномиальное время.
+    \end{itemize}
+    
+    \textbf{Сведение из известной NP-полной задачи:}
+    \begin{itemize}
+        \item Используем задачу Partition или 3-распределение (3-Partition) для доказательства.
+        \item Показываем, что любая NP-задача может быть сведена к многопроцессорному расписанию.
+    \end{itemize}
+    
+    \textbf{Основные шаги доказательства:}
+    \begin{enumerate}
+        \item Выбираем известную NP-полную задачу.
+        \item Строим полиномиальное сведение от этой задачи к задаче многопроцессорного расписания.
+        \item Показываем, что решение одной задачи эквивалентно решению другой.
+    \end{enumerate}
+    
+    \textbf{Вывод:}
+    Задача многопроцессорного расписания является NP-полной.
+\end{frame}
+
+% Применение задачи
+\begin{frame}{Применение задачи многопроцессорного расписания}
+    \begin{itemize}
+        \item \textbf{Компьютерные системы:}
+        \begin{itemize}
+            \item Распределение процессов и потоков между ядрами процессора.
+        \end{itemize}
+        \item \textbf{Производственные системы:}
+        \begin{itemize}
+            \item Планирование производственных процессов на различных машинах или линиях.
+        \end{itemize}
+        \item \textbf{Логистика:}
+        \begin{itemize}
+            \item Организация доставки и распределения ресурсов.
+        \end{itemize}
+        \item \textbf{Облачные вычисления:}
+        \begin{itemize}
+            \item Оптимизация использования виртуальных машин и серверов.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Заключение
+\begin{frame}{Заключение}
+    \begin{itemize}
+        \item Многопроцессорное расписание — фундаментальная задача в оптимизации и теории сложности.
+        \item Задача NP-полная, что делает её решение для больших экземпляров вычислительно сложным.
+        \item Практическое применение в различных областях требует использования эвристических и приближенных методов.
+        \item Понимание сложности задачи важно для разработки эффективных алгоритмов распределения ресурсов.
+    \end{itemize}
+\end{frame}
+
+% Список литературы
+\begin{frame}{Список литературы}
+    \begin{thebibliography}{9}
+        \bibitem{garey1979computers}
+        M. R. Garey, D. S. Johnson. \textit{Computers and Intractability: A Guide to the Theory of NP-Completeness}. W.H. Freeman, 1979.
+        
+        \bibitem{scheduling}
+        R. Graham. \textit{Scheduling: Theory, Algorithms, and Systems}. Prentice Hall, 1966.
+        
+        \bibitem{multiprocessor}
+        K. Pruhs, J. R. Rice. \textit{Scheduling on Multiprocessors: Algorithms and Complexity}. Springer, 1997.
+    \end{thebibliography}
+\end{frame}
+
+\end{document}
